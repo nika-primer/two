@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIKA YASNO — Гипнотерапия, энерготерапия, регресс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #120E0D;
+    --bg-soft: #171211;
+    --card: #1D1615;
+    --card-border: rgba(201,162,39,0.18);
+    --wine: #7A2333;
+    --wine-bright: #A33240;
+    --gold: #C9A227;
+    --gold-soft: #E5C99A;
+    --ivory: #F3E9DE;
+    --muted: #B3A296;
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,blockquote{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    font-weight:500;
+  }
+  ::selection{background:var(--wine); color:var(--ivory);}
+
+  /* subtle noise + vignette on body */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(122,35,51,0.16), transparent 55%),
+      radial-gradient(ellipse at 90% 10%, rgba(201,162,39,0.08), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:50;
+    padding:22px 0;
+    background:linear-gradient(to bottom, rgba(18,14,13,0.85), transparent);
+    transition:background .4s ease, padding .4s ease;
+  }
+  header.scrolled{
+    background:rgba(18,14,13,0.92);
+    backdrop-filter:blur(14px);
+    padding:14px 0;
+    border-bottom:1px solid var(--card-border);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px;
+    letter-spacing:0.18em;
+    color:var(--ivory);
+  }
+  .logo span{color:var(--gold);}
+  .nav-cta{
+    border:1px solid var(--gold-soft);
+    color:var(--gold-soft);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    padding:10px 20px;
+    border-radius:var(--radius);
+    transition:all .3s ease;
+  }
+  .nav-cta:hover{background:var(--gold-soft); color:#1a1210; border-color:var(--gold-soft);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:flex-end;
+    padding-top:120px;
+    overflow:hidden;
+  }
+  .hero-photo{
+    position:absolute;
+    top:0; right:0;
+    width:56%;
+    height:100%;
+    z-index:1;
+  }
+  .hero-photo img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:60% 20%;
+    filter:saturate(0.92) contrast(1.03);
+  }
+  .hero-photo::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to right, var(--bg) 0%, transparent 32%),
+      linear-gradient(to bottom, transparent 55%, var(--bg) 100%),
+      linear-gradient(to top, rgba(18,14,13,0.35), transparent 30%);
+  }
+  @media (max-width: 860px){
+    .hero-photo{width:100%; opacity:0.5;}
+    .hero-photo::after{
+      background:
+        linear-gradient(to bottom, rgba(18,14,13,0.2) 0%, var(--bg) 78%);
+    }
+  }
+
+  .hero-content{
+    position:relative; z-index:5;
+    width:100%;
+    padding-bottom:90px;
+  }
+  .hero-inner{max-width:640px;}
+  .hero-badge{
+    display:inline-block;
+    border:1px solid var(--card-border);
+    padding:8px 16px;
+    border-radius:100px;
+    margin-bottom:26px;
+    background:rgba(29,22,21,0.5);
+    backdrop-filter:blur(6px);
+  }
+  .hero h1{
+    font-size:clamp(34px, 5vw, 56px);
+    line-height:1.12;
+    color:var(--ivory);
+    margin-bottom:24px;
+    font-style:italic;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-soft);
+  }
+  .hero p.lead{
+    font-size:17px;
+    color:var(--muted);
+    max-width:480px;
+    margin-bottom:36px;
+    font-weight:300;
+  }
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 30px;
+    font-size:13px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    border-radius:var(--radius);
+    transition:all .35s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--wine-bright), var(--wine));
+    color:var(--ivory);
+    box-shadow:0 0 0 rgba(201,162,39,0);
+  }
+  .btn-primary:hover{
+    box-shadow:0 6px 26px rgba(163,50,64,0.45);
+    transform:translateY(-1px);
+  }
+  .btn-ghost{
+    border-color:var(--gold-soft);
+    color:var(--gold-soft);
+  }
+  .btn-ghost:hover{background:rgba(229,201,154,0.08);}
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:28px;
+    z-index:5;
+    display:flex; align-items:center; gap:10px;
+    font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--muted);
+  }
+  .scroll-cue .line{width:36px; height:1px; background:var(--gold); animation:pulseLine 2.4s ease-in-out infinite;}
+  @keyframes pulseLine{0%,100%{opacity:0.3; width:24px;} 50%{opacity:1; width:44px;}}
+
+  /* ---------- SIGNATURE DIVIDER: moon phase arc ---------- */
+  .divider{
+    position:relative;
+    padding:64px 0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .divider svg{opacity:0.55;}
+  .moon-cycle{animation:driftMoon 40s linear infinite;}
+  @keyframes driftMoon{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .moon-cycle, .scroll-cue .line{animation:none;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative; z-index:2; padding:100px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:14px; display:block;}
+  .section-head h2{
+    font-size:clamp(28px, 3.4vw, 40px);
+    color:var(--ivory);
+    font-style:italic;
+  }
+
+  /* ---------- PAIN POINTS ---------- */
+  .pain-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--card-border);
+    border:1px solid var(--card-border);
+  }
+  @media (max-width:760px){.pain-grid{grid-template-columns:1fr;}}
+  .pain-card{
+    background:var(--card);
+    padding:38px 34px;
+    transition:background .35s ease;
+  }
+  .pain-card:hover{background:#221816;}
+  .pain-card h3{
+    font-size:21px;
+    color:var(--gold-soft);
+    margin-bottom:12px;
+    font-weight:500;
+  }
+  .pain-card p{color:var(--muted); font-size:15px;}
+
+  /* ---------- PHILOSOPHY ---------- */
+  .philosophy{
+    background:var(--bg-soft);
+    border-top:1px solid var(--card-border);
+    border-bottom:1px solid var(--card-border);
+  }
+  .philosophy-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  @media (max-width:820px){.philosophy-inner{grid-template-columns:1fr;}}
+  blockquote{
+    font-size:clamp(24px, 3vw, 34px);
+    line-height:1.35;
+    color:var(--gold-soft);
+    font-style:italic;
+    position:relative;
+    padding-left:26px;
+    border-left:1px solid var(--gold);
+  }
+  .philosophy p{color:var(--muted); font-size:16px; margin-top:0;}
+  .philosophy p + p{margin-top:16px;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--bg);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
+  }
+  @media (max-width:820px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:var(--radius);
+    padding:34px;
+    position:relative;
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:border-color .35s ease, transform .35s ease;
+  }
+  .service-card:hover{border-color:rgba(201,162,39,0.5); transform:translateY(-3px);}
+  .service-card.flagship{
+    border-color:var(--gold);
+    background:linear-gradient(160deg, #241512 0%, #1D1615 60%);
+  }
+  .service-card.flagship::before{
+    content:"";
+    position:absolute; top:-40%; right:-20%;
+    width:220px; height:220px;
+    background:radial-gradient(circle, rgba(122,35,51,0.35), transparent 70%);
+    pointer-events:none;
+  }
+  .tag{
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+    color:var(--wine-bright);
+    border:1px solid rgba(163,50,64,0.5);
+    display:inline-block;
+    padding:4px 12px;
+    border-radius:100px;
+    margin-bottom:18px;
+    width:fit-content;
+  }
+  .flagship .tag{color:var(--gold); border-color:rgba(201,162,39,0.55);}
+  .service-card h3{font-size:23px; color:var(--ivory); margin-bottom:6px; font-weight:500;}
+  .price{
+    font-family:'Cormorant Garamond', serif;
+    font-size:30px;
+    color:var(--gold-soft);
+    margin-bottom:4px;
+  }
+  .price span{font-size:13px; color:var(--muted); font-family:'Jost',sans-serif;}
+  .format{font-size:13px; color:var(--muted); margin-bottom:20px; letter-spacing:0.02em;}
+  .service-card ul{list-style:none; margin-bottom:26px; flex-grow:1;}
+  .service-card ul li{
+    font-size:14.5px; color:var(--muted);
+    padding-left:18px; position:relative;
+    margin-bottom:10px;
+  }
+  .service-card ul li::before{
+    content:"—";
+    position:absolute; left:0; color:var(--gold);
+  }
+  .service-btn{
+    align-self:flex-start;
+    font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ivory);
+    border:1px solid var(--card-border);
+    padding:12px 22px;
+    border-radius:var(--radius);
+    transition:all .3s ease;
+  }
+  .service-btn:hover{border-color:var(--gold); color:var(--gold-soft); background:rgba(201,162,39,0.06);}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--bg-soft); border-top:1px solid var(--card-border);}
+  .faq-item{
+    border-bottom:1px solid var(--card-border);
+    padding:26px 0;
+    cursor:pointer;
+  }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:18px; color:var(--ivory);
+    font-family:'Cormorant Garamond', serif;
+  }
+  .faq-icon{
+    width:22px; height:22px;
+    position:relative;
+    flex-shrink:0;
+    margin-left:20px;
+  }
+  .faq-icon::before, .faq-icon::after{
+    content:"";
+    position:absolute; background:var(--gold);
+    transition:transform .3s ease;
+  }
+  .faq-icon::before{width:14px; height:1px; top:50%; left:50%; transform:translate(-50%,-50%);}
+  .faq-icon::after{width:1px; height:14px; top:50%; left:50%; transform:translate(-50%,-50%);}
+  .faq-item.open .faq-icon::after{transform:translate(-50%,-50%) rotate(90deg); opacity:0;}
+  .faq-a{
+    max-height:0; overflow:hidden;
+    transition:max-height .4s ease, margin-top .4s ease;
+    color:var(--muted); font-size:15px; max-width:680px;
+  }
+  .faq-item.open .faq-a{max-height:220px; margin-top:14px;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    text-align:center;
+    padding:130px 0;
+    position:relative;
+  }
+  .final-cta::before{
+    content:"";
+    position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:1px; height:60px; background:linear-gradient(var(--gold), transparent);
+  }
+  .final-cta h2{
+    font-size:clamp(30px, 4.2vw, 48px);
+    max-width:720px; margin:0 auto 18px;
+    font-style:italic;
+  }
+  .final-cta p{color:var(--muted); margin-bottom:38px;}
+  .final-cta .btn-row{justify-content:center;}
+
+  footer{
+    border-top:1px solid var(--card-border);
+    padding:34px 0;
+    text-align:center;
+    color:var(--muted);
+    font-size:12.5px;
+    letter-spacing:0.04em;
+  }
+  footer .logo{font-size:16px; margin-bottom:10px; display:block;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo">NIKA <span>YASNO</span></a>
+      <a href="#final" class="nav-cta">Telegram</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-photo"><img src="hero.jpg" alt="Ника Yasno на закате у океана"></div>
+  <div class="hero-content wrap">
+    <div class="hero-inner">
+      <div class="hero-badge eyebrow">Гипнотерапия · Энерготерапия · Регресс</div>
+      <h1>Если проблема возвращается снова и снова — <em>значит, вы работаете с симптомом, а не с причиной.</em></h1>
+      <p class="lead">Помогаю найти и устранить подсознательные блоки, родовые программы и внешние негативные воздействия, которые забирают ваши деньги, здоровье и энергию.</p>
+      <div class="btn-row">
+        <a href="#services" class="btn btn-primary">Записаться на сессию</a>
+        <a href="#final" class="btn btn-ghost">Написать в Telegram</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span> Прокрутите вниз</div>
+</section>
+
+<div class="divider">
+  <svg width="120" height="60" viewBox="0 0 120 60" class="moon-cycle" style="transform-origin:60px 30px;">
+    <circle cx="60" cy="30" r="5" fill="none" stroke="#C9A227" stroke-width="1"/>
+    <path d="M60 22 A8 8 0 0 1 60 38 A5 5 0 0 0 60 22" fill="#C9A227" opacity="0.7"/>
+    <circle cx="18" cy="30" r="1.4" fill="#7A2333"/>
+    <circle cx="102" cy="30" r="1.4" fill="#7A2333"/>
+    <line x1="0" y1="30" x2="46" y2="30" stroke="#C9A227" stroke-width="0.5" opacity="0.35"/>
+    <line x1="74" y1="30" x2="120" y2="30" stroke="#C9A227" stroke-width="0.5" opacity="0.35"/>
+  </svg>
+</div>
+
+<section id="pains">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">С чем вы пришли</span>
+      <h2>Знакомые состояния — за ними всегда есть причина</h2>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <h3>Негативное окружение и утечка сил</h3>
+        <p>Чувствуете постоянную тяжесть после общения? Столкнулись с резким упадком сил, завистью, предательством или подозреваете внешнее негативное воздействие — порчи, подклады, энергетические «привязки».</p>
+      </div>
+      <div class="pain-card">
+        <h3>Финансовые тупики и «стеклянный потолок»</h3>
+        <p>Деньги уходят сквозь пальцы, любые попытки вырасти в доходе упираются в барьер, а всплески заработка сменяются резкими незапланированными тратами и убытками.</p>
+      </div>
+      <div class="pain-card">
+        <h3>Повторяющиеся сценарии в отношениях</h3>
+        <p>Вы наступаете на одни и те же грабли с партнёрами или проживаете тяжёлые конфликты с близкими и родственниками, из которых невозможно выйти без потерь.</p>
+      </div>
+      <div class="pain-card">
+        <h3>Непонятная тревога и потеря себя</h3>
+        <p>Страхи, фобии, бессонница и ощущение, будто вашей жизнью управляет кто-то другой, а вы не можете раскрыть свой истинный потенциал.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="wrap philosophy-inner">
+    <blockquote>«Я вижу глубже, чем проявляется проблема. Внешние неприятности — это лишь верхушка айсберга».</blockquote>
+    <div>
+      <span class="eyebrow" style="display:block; margin-bottom:16px;">Метод</span>
+      <p>Большинство людей годами пытаются решить проблемы на логическом уровне, но логика не управляет подсознанием.</p>
+      <p>В своей работе я совмещаю глубокую гипнотерапию, регрессивные техники и энерготерапию. Это позволяет за 1–3 сеанса считывать истинные причины ситуаций, находить «корень» в подсознании или родовом опыте и полностью перезаписывать разрушительные сценарии.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Форматы работы</span>
+      <h2>Выберите глубину проработки</h2>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <span class="tag">Быстрый старт</span>
+        <h3>Диагностика ауры и состояния</h3>
+        <div class="price">5 000 ₽</div>
+        <div class="format">Аудио-разбор в Telegram · по фото, имени и дате рождения</div>
+        <ul>
+          <li>Полный анализ текущего энергетического поля и биополя</li>
+          <li>Выявление скрытых блоков, уязвимостей и внешних влияний</li>
+          <li>Ответы на 5 ваших личных вопросов</li>
+        </ul>
+        <a href="#" class="service-btn">Заказать диагностику</a>
+      </div>
+
+      <div class="service-card flagship">
+        <span class="tag">Флагманский формат</span>
+        <h3>Индивидуальная глубинная сессия</h3>
+        <div class="price">30 000 ₽</div>
+        <div class="format">Онлайн в Zoom · ~3 часа работы</div>
+        <ul>
+          <li>Родовые программы, кармические узлы, сценарии прошлых жизней</li>
+          <li>Детские психотравмы, глубинные страхи и фобии</li>
+          <li>Потери энергии, сущности и внешние негативные воздействия</li>
+          <li>Снятие финблоков и программ самообесценивания</li>
+        </ul>
+        <a href="#" class="service-btn" style="border-color:var(--gold); color:var(--gold-soft);">Забронировать дату</a>
+      </div>
+
+      <div class="service-card">
+        <span class="tag">Для родителей</span>
+        <h3>Трансформация состояния ребёнка</h3>
+        <div class="price">15 000 ₽ <span>до 12 лет</span></div>
+        <div class="format">Онлайн в Zoom через маму · ~3 часа</div>
+        <ul>
+          <li>До 12 лет ребёнок находится в едином энергетическом и эмоциональном поле с мамой</li>
+          <li>Работаем с причиной через поле мамы, не травмируя психику ребёнка сеансами</li>
+        </ul>
+        <a href="#" class="service-btn">Записаться на сессию</a>
+      </div>
+
+      <div class="service-card">
+        <span class="tag">Сообщество</span>
+        <h3>Закрытый клуб YASNO → К СЕБЕ</h3>
+        <div class="price">1 500 ₽ <span>в месяц</span></div>
+        <div class="format">Закрытое пространство в Telegram</div>
+        <ul>
+          <li>Регулярные практики самопрограммирования и энергопрактики</li>
+          <li>Разборы ситуаций и прямые эфиры с Никой</li>
+          <li>Бесплатные демо-сессии прямо в эфире для участников</li>
+          <li>Безопасное окружение единомышленников</li>
+        </ul>
+        <a href="#" class="service-btn">Вступить в клуб</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Вопросы</span>
+      <h2>То, что обычно спрашивают перед сессией</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q">Безопасно ли проводить гипноз и работать с энергией онлайн через Zoom?<span class="faq-icon"></span></div>
+        <div class="faq-a">Абсолютно. Для подсознания и энергетики не существует расстояний. Онлайн-формат даже предпочтительнее: вы находитесь в своём безопасном и комфортном пространстве, где вам легче расслабиться.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">А вдруг я не поддаюсь гипнозу или ничего не увижу?<span class="faq-icon"></span></div>
+        <div class="faq-a">В гипнотерапии мы не отключаем ваше сознание. Вы всё помните, контролируете процесс и можете остановить его в любой момент. Это состояние глубокого расслабления, в котором находится каждый человек перед сном.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Как понять, что мне нужно: Диагностика за 5 000 ₽ или сразу Сессия за 30 000 ₽?<span class="faq-icon"></span></div>
+        <div class="faq-a">Если у вас есть один конкретный вопрос и вы хотите точечно «просканировать» ситуацию — выбирайте Диагностику. Если вы готовы сразу проработать и убрать проблему — записывайтесь на Сессию.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="final" class="final-cta">
+  <div class="wrap">
+    <h2>Готовы узнать, что на самом деле управляет вашей жизнью?</h2>
+    <p>Выберите подходящий формат или напишите в мессенджер, если сомневаетесь с выбором.</p>
+    <div class="btn-row">
+      <a href="#services" class="btn btn-primary">Выбрать услугу</a>
+      <a href="#" class="btn btn-ghost">Написать Нике в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="logo">NIKA YASNO</span>
+    Гипнотерапия · Энерготерапия · Регресс
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // faq accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
